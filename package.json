@@ -1,0 +1,23 @@
+{
+  "name": "cra-template-typescript-electron",
+  "version": "1.0.0",
+  "description": "An Electron tmeplate uses Typescript completely for Create React App.",
+  "main": "template.json",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "electron",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vixalie/cra-template-typescript-electron.git"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "author": "FarDawn",
+  "license": "MIT",
+  "files": ["template.json", "template"]
+}
