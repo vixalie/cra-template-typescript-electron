@@ -1,36 +1,41 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const createWindow = (): void => {
-    const mainWindow = new BrowserWindow({
-        height: 600,
-        width: 800,
-        webPreferences: {
-          nodeIntegration: true,
-          nodeIntegrationInWorker: true,
-          nodeIntegrationInSubFrames: true,
-          enableRemoteModule: true,
-          contextIsolation: false,
-          // When contextIsolation is enabled, preload.js will encounter "require is not defined" error.
-          // But when contextIsolation is disabled, preload.js will not be loaded.
-          // preload: path.join(__dirname, 'preload.js')
-        }
-    });
-
-    if (isDev) {
-      mainWindow.loadURL('http://localhost:3000');
-      mainWindow.webContents.openDevTools();
-    } else {
-      mainWindow.loadFile(path.join('build', 'index.html'));
+  const mainWindow = new BrowserWindow({
+    height: 600,
+    width: 800,
+    webPreferences: {
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
+      nodeIntegrationInSubFrames: true,
+      enableRemoteModule: true,
+      contextIsolation: false
+      // When contextIsolation is enabled, preload.js will encounter "require is not defined" error.
+      // But when contextIsolation is disabled, preload.js will not be loaded.
+      // preload: path.join(__dirname, 'preload.js')
     }
+  });
+
+  if (isDev) {
+    installExtension([REACT_DEVELOPER_TOOLS])
+      .then(() => {
+        mainWindow.loadURL('http://localhost:3000');
+        mainWindow.webContents.openDevTools();
+      })
+      .catch(err => console.log('An error occurred: ', err));
+  } else {
+    mainWindow.loadFile(path.join('build', 'index.html'));
+  }
 };
 
 app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-      app.quit();
-    }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
