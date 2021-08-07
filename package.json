@@ -1,7 +1,7 @@
 {
   "name": "cra-template-typescript-electron",
   "version": "1.0.0",
-  "description": "An Electron tmeplate uses Typescript completely for Create React App.",
+  "description": "An Electron template uses Typescript completely for Create React App.",
   "main": "template.json",
   "keywords": [
     "react",
@@ -19,5 +19,8 @@
   },
   "author": "FarDawn",
   "license": "MIT",
-  "files": ["template.json", "template"]
+  "files": [
+    "template.json",
+    "template"
+  ]
 }
