@@ -9,14 +9,12 @@ const createWindow = (): void => {
     height: 600,
     width: 800,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
       nodeIntegrationInWorker: true,
       nodeIntegrationInSubFrames: true,
       enableRemoteModule: true,
-      contextIsolation: false
-      // When contextIsolation is enabled, preload.js will encounter "require is not defined" error.
-      // But when contextIsolation is disabled, preload.js will not be loaded.
-      // preload: path.join(__dirname, 'preload.js')
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
